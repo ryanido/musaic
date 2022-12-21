@@ -1,0 +1,38 @@
+[
+    {
+      "name": "Giveon",
+      "genre": "R&B",
+      "albums": ["Take Time", "When It's All Said and Done"],
+      "cover": "https://i.imgur.com/7v0EsGR.jpg"
+    },
+    {
+      "name": "Jorja Smith",
+      "genre": "R&B",
+      "albums": ["Lost and Found", "Be Right Back"],
+      "cover": "https://i.imgur.com/ewnj1z9.jpg"
+    },
+    {
+      "name": "Future",
+      "genre": "Hip Hop",
+      "albums": ["I Never Liked You", "HNDRXX"],
+      "cover": "https://i.imgur.com/TmTpTGi.jpg"
+    },
+    {
+      "name": "Drake",
+      "genre": "Hip Hop",
+      "albums": ["Her Loss", "Scorpion"],
+      "cover": "https://i.imgur.com/8VvI60b.jpg"
+    },
+    {
+      "name": "Calvin Harris",
+      "genre": "Dance",
+      "albums": ["Promises", "18 Months"],
+      "cover": "https://i.imgur.com/tFpJt8B.jpg"
+    },
+    {
+      "name": "Dua Lipa",
+      "genre": "Pop",
+      "albums": ["Future Nostalgia", "Dua Lipa"],
+      "cover": "https://i.imgur.com"
+    }
+]  
