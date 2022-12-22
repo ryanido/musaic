@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from './Home';
 import Header from './Header';
+import LoginPage from './LoginPage';
 
 const AppNavigator = createStackNavigator();
 
@@ -15,6 +16,7 @@ export default function App() {
         <AppNavigator.Navigator screenOptions={{
           headerShown: false
         }}>
+          <AppNavigator.Screen name="Login" component={LoginPage} />
           <AppNavigator.Screen name="Home" component={Home} />
         </AppNavigator.Navigator>
       </NavigationContainer>

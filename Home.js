@@ -9,13 +9,13 @@ import colors from './colors';
 import Header from './Header';
 import ArtistCarousel from './ArtistCarousel';
 
-const Home = () => {
+const Home = ({navigation, route}) => {
     const [recommendedAlbums, setRecommendedAlbums] = useState([]); // create a state variable to store the imported data
 
     //   useEffect(() => {
     //     setRecommendedAlbums(albums); // set the state variable to the imported data
     //   }, []);
-
+    console.log(route.params)
     return (
         <ScrollView style={styles.scrollCon} contentContainerStyle={styles.container}>
             <Carousel title={"Recommended Albums"} data={albums} />
