@@ -8,14 +8,23 @@ import Carousel from './Carousel';
 import colors from './colors';
 import Header from './Header';
 import ArtistCarousel from './ArtistCarousel';
+import axios from 'axios';
+import env from 'react-native-dotenv';
 
-const Home = ({navigation, route}) => {
-    const [recommendedAlbums, setRecommendedAlbums] = useState([]); // create a state variable to store the imported data
+const Home = ({ navigation, route }) => {
+   
+    const { code } = route.params;
+    axios.get(`${env.SERVER_URL}recently-played`, {
+        params: {
+            code: code
+        }
+    }).then(response => {
+        console.log(response)
+    }).catch(error => {
+        console.log(error)
+    });
 
-    //   useEffect(() => {
-    //     setRecommendedAlbums(albums); // set the state variable to the imported data
-    //   }, []);
-    console.log(route.params)
+
     return (
         <ScrollView style={styles.scrollCon} contentContainerStyle={styles.container}>
             <Carousel title={"Recommended Albums"} data={albums} />

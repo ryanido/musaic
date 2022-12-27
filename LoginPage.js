@@ -4,6 +4,7 @@ import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import { Button, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import colors from './colors';
 import spotifylogo from './assets/spotify.png'
+import env from 'react-native-dotenv';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -16,10 +17,10 @@ const discovery = {
 export default function LoginPage({ navigation }) {
     const [request, response, promptAsync] = useAuthRequest(
         {
-            clientId: '56c3551c92fb40c48cc80cf569f627c9',
+            clientId: env.CLIENT_ID,
             scopes: [
                 'user-read-email',
-                'playlist-modify-public',
+                'playlist-read-private',
                 'user-top-read',
                 'user-library-read',
                 'user-read-recently-played'
@@ -28,7 +29,7 @@ export default function LoginPage({ navigation }) {
             // this must be set to false
             usePKCE: false,
             redirectUri: makeRedirectUri({
-                scheme: 'exp://192.168.1.17:19000'
+                scheme: env.REDIRECT_URI
             }),
         },
         discovery
@@ -37,7 +38,23 @@ export default function LoginPage({ navigation }) {
     React.useEffect(() => {
         if (response?.type === 'success') {
             const { code } = response.params;
-            navigation.navigate('Home', { code: code })
+            fetch(discovery.tokenEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `grant_type=authorization_code&code=${code}&redirect_uri=${encodeURIComponent(
+                    env.REDIRECT_URI
+                )}&client_id=${env.CLIENT_ID}&client_secret=${env.CLIENT_SECRET}`,
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    // The access token is contained in the `data` object
+                    console.log(data)
+                    const { access_token } = data;
+                    navigation.navigate('Home', { code: access_token });
+                })
+                .catch((error) => console.log(error) )
         }
     }, [response]);
 
@@ -46,7 +63,7 @@ export default function LoginPage({ navigation }) {
             <TouchableOpacity style={styles.loginButton} onPress={() => {
                 promptAsync();
             }}>
-                <Image  style = {styles.spotifylogo} source = {spotifylogo}/>
+                <Image style={styles.spotifylogo} source={spotifylogo} />
             </TouchableOpacity>
         </View>
     );
@@ -59,11 +76,11 @@ const styles = StyleSheet.create({
         width: '80%',
         borderRadius: 10,
         alignItems: 'center',
-        marginTop:'25%'
+        marginTop: '25%'
     },
-    spotifylogo:{
-        height:60,
-        aspectRatio:2362/708
+    spotifylogo: {
+        height: 60,
+        aspectRatio: 2362 / 708
     },
     container: {
         backgroundColor: colors.darkGray,
