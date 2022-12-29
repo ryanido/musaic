@@ -4,7 +4,8 @@ import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import { Button, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import colors from './colors';
 import spotifylogo from './assets/spotify.png'
-import env from 'react-native-dotenv';
+import {SERVER_URL,REDIRECT_URI,CLIENT_ID,CLIENT_SECRET} from "@env"
+console.log(CLIENT_ID)
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -14,10 +15,11 @@ const discovery = {
     tokenEndpoint: 'https://accounts.spotify.com/api/token',
 };
 
+
 export default function LoginPage({ navigation }) {
     const [request, response, promptAsync] = useAuthRequest(
         {
-            clientId: env.CLIENT_ID,
+            clientId: CLIENT_ID,
             scopes: [
                 'user-read-email',
                 'playlist-read-private',
@@ -29,7 +31,7 @@ export default function LoginPage({ navigation }) {
             // this must be set to false
             usePKCE: false,
             redirectUri: makeRedirectUri({
-                scheme: env.REDIRECT_URI
+                scheme: REDIRECT_URI
             }),
         },
         discovery
@@ -44,8 +46,8 @@ export default function LoginPage({ navigation }) {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: `grant_type=authorization_code&code=${code}&redirect_uri=${encodeURIComponent(
-                    env.REDIRECT_URI
-                )}&client_id=${env.CLIENT_ID}&client_secret=${env.CLIENT_SECRET}`,
+                    REDIRECT_URI
+                )}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`,
             })
                 .then((response) => response.json())
                 .then((data) => {

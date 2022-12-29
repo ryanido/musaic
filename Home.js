@@ -9,12 +9,12 @@ import colors from './colors';
 import Header from './Header';
 import ArtistCarousel from './ArtistCarousel';
 import axios from 'axios';
-import env from 'react-native-dotenv';
+import {SERVER_URL} from '@env'
 
 const Home = ({ navigation, route }) => {
    
     const { code } = route.params;
-    axios.get(`${env.SERVER_URL}recently-played`, {
+    axios.get(`${SERVER_URL}recommendations`, {
         params: {
             code: code
         }
