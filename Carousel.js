@@ -13,7 +13,7 @@ const Carousel = ({data,title}) => {
                 data={data} // set the data prop to the recommendedAlbums state variable
                 horizontal // enable horizontal scrolling
                 showsHorizontalScrollIndicator={false} // hide the scroll indicator
-                keyExtractor={item => item.name} // use the album name as the key
+                keyExtractor={item => item.id} // use the album name as the key
                 renderItem={({ item }) => (
                     <AlbumIcon album={item} />
                 )}

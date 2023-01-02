@@ -9,26 +9,35 @@ import colors from './colors';
 import Header from './Header';
 import ArtistCarousel from './ArtistCarousel';
 import axios from 'axios';
-import {SERVER_URL} from '@env'
+import { SERVER_URL } from '@env'
 
 const Home = ({ navigation, route }) => {
-   
+    const [recommendations, setRecommendations] = useState({ "albums": albums, "tracks": songs })
+    const [loading, setLoading] = useState(true)
     const { code } = route.params;
-    axios.get(`${SERVER_URL}recommendations`, {
-        params: {
-            code: code
-        }
-    }).then(response => {
-        console.log(response)
-    }).catch(error => {
-        console.log(error)
-    });
 
+    
+    useEffect(() => {
+        getRecommendations();
+      }, []);
+
+    const getRecommendations = () => {
+        axios.get(`${SERVER_URL}recommendations`, {
+            params: {
+                code: code
+            }
+        }).then(response => {
+            setRecommendations(response.data);
+            setLoading(false)
+        }).catch(error => {
+            console.log(error)
+        });
+    }
 
     return (
         <ScrollView style={styles.scrollCon} contentContainerStyle={styles.container}>
-            <Carousel title={"Recommended Albums"} data={albums} />
-            <Carousel title={"Recommended Songs"} data={songs} />
+            <Carousel title={"Recommended Albums"} data={recommendations.albums} />
+            <Carousel title={"Recommended Songs"} data={recommendations.tracks} />
             <ArtistCarousel title={"Recommended Artists"} data={artists} />
         </ScrollView>
     );
