@@ -13,15 +13,17 @@ import { SERVER_URL } from '@env'
 
 const Home = ({ navigation, route }) => {
     const [recommendations, setRecommendations] = useState({ "albums": albums, "tracks": songs })
+    const [recentlyPlayed, setRecentlyPlayed] = useState(songs)
     const [loading, setLoading] = useState(true)
     const { code } = route.params;
 
-    
     useEffect(() => {
         getRecommendations();
+        getRecentlyPlayed();
       }, []);
 
     const getRecommendations = () => {
+        setLoading(true)
         axios.get(`${SERVER_URL}recommendations`, {
             params: {
                 code: code
@@ -34,8 +36,23 @@ const Home = ({ navigation, route }) => {
         });
     }
 
+    const getRecentlyPlayed = () => {
+        setLoading(true)
+        axios.get(`${SERVER_URL}recently-played`, {
+            params: {
+                code: code
+            }
+        }).then(response => {
+            setRecentlyPlayed(response.data);
+            setLoading(false)
+        }).catch(error => {
+            console.log(error)
+        });
+    }
+
     return (
         <ScrollView style={styles.scrollCon} contentContainerStyle={styles.container}>
+            <Carousel title= {"Recently Played"} data={recentlyPlayed} />
             <Carousel title={"Recommended Albums"} data={recommendations.albums} />
             <Carousel title={"Recommended Songs"} data={recommendations.tracks} />
             <ArtistCarousel title={"Recommended Artists"} data={artists} />
