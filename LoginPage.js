@@ -5,7 +5,7 @@ import { Button, View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import colors from './colors';
 import spotifylogo from './assets/spotify.png'
 import {SERVER_URL,REDIRECT_URI,CLIENT_ID,CLIENT_SECRET} from "@env"
-console.log(CLIENT_ID)
+
 
 WebBrowser.maybeCompleteAuthSession();
 

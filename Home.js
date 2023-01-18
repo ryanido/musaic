@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, View, StyleSheet, Text, ScrollView } from 'react-native';
+import { FlatList, View, StyleSheet, Text, ScrollView, ActivityIndicator } from 'react-native';
 import AlbumIcon from './AlbumIcon';
 import albums from './albums.json'; // import the JSON data
 import songs from './songs.json';
@@ -10,6 +10,7 @@ import Header from './Header';
 import ArtistCarousel from './ArtistCarousel';
 import axios from 'axios';
 import { SERVER_URL } from '@env'
+import { RefreshControl } from 'react-native-gesture-handler';
 
 const Home = ({ navigation, route }) => {
     const [recommendations, setRecommendations] = useState({ "albums": albums, "tracks": songs })
@@ -18,45 +19,54 @@ const Home = ({ navigation, route }) => {
     const { code } = route.params;
 
     useEffect(() => {
+        refresh();
+    }, []);
+
+    const refresh = () => {
+        setLoading(true)
         getRecommendations();
         getRecentlyPlayed();
-      }, []);
-
+        setLoading(false)
+    }
     const getRecommendations = () => {
-        setLoading(true)
         axios.get(`${SERVER_URL}recommendations`, {
             params: {
                 code: code
             }
         }).then(response => {
             setRecommendations(response.data);
-            setLoading(false)
         }).catch(error => {
             console.log(error)
         });
     }
 
     const getRecentlyPlayed = () => {
-        setLoading(true)
         axios.get(`${SERVER_URL}recently-played`, {
             params: {
                 code: code
             }
         }).then(response => {
             setRecentlyPlayed(response.data);
-            setLoading(false)
         }).catch(error => {
             console.log(error)
         });
     }
 
     return (
-        <ScrollView style={styles.scrollCon} contentContainerStyle={styles.container}>
-            <Carousel title= {"Recently Played"} data={recentlyPlayed} />
-            <Carousel title={"Recommended Albums"} data={recommendations.albums} />
-            <Carousel title={"Recommended Songs"} data={recommendations.tracks} />
-            <ArtistCarousel title={"Recommended Artists"} data={artists} />
-        </ScrollView>
+        <>
+            {loading ? (
+                <ActivityIndicator size="large" color="#0000ff" />
+            ) : (
+                <ScrollView style={styles.scrollCon}
+                    contentContainerStyle={styles.container}
+                    refreshControl={<RefreshControl refreshing={loading} onRefresh={refresh} />}>
+                    <Carousel title={"Recently Played"} data={recentlyPlayed.tracks} />
+                    <Carousel title={"Recommended Albums"} data={recommendations.albums} />
+                    <Carousel title={"Recommended Songs"} data={recommendations.tracks} />
+                    {/* <ArtistCarousel title={"Recommended Artists"} data={artists} /> */}
+                </ScrollView>
+            )}
+        </>
     );
 };
 
