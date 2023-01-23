@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Home from './Home';
 import Header from './Header';
 import LoginPage from './LoginPage';
+import AlbumPage from './AlbumPage';
 
 const AppNavigator = createStackNavigator();
 
@@ -18,6 +19,7 @@ export default function App() {
         }}>
           <AppNavigator.Screen name="Login" component={LoginPage} />
           <AppNavigator.Screen name="Home" component={Home} />
+          <AppNavigator.Screen name='AlbumPage' component={AlbumPage}/>
         </AppNavigator.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />

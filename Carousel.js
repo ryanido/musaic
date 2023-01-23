@@ -15,7 +15,7 @@ const Carousel = ({data,title}) => {
                 showsHorizontalScrollIndicator={false} // hide the scroll indicator
                 keyExtractor={item => item.id} // use the album name as the key
                 renderItem={({ item }) => (
-                    <AlbumIcon album={item} />
+                <AlbumIcon album={item} size={1.3}/>
                 )}
             />
         </View>

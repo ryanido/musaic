@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, View, StyleSheet, Text, ScrollView, ActivityIndicator } from 'react-native';
+import { FlatList, View, StyleSheet, Text, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import AlbumIcon from './AlbumIcon';
 import albums from './albums.json'; // import the JSON data
 import songs from './songs.json';
@@ -11,10 +11,11 @@ import ArtistCarousel from './ArtistCarousel';
 import axios from 'axios';
 import { SERVER_URL } from '@env'
 import { RefreshControl } from 'react-native-gesture-handler';
+import {Ionicons} from 'react-native-vector-icons'
 
 const Home = ({ navigation, route }) => {
-    const [recommendations, setRecommendations] = useState({ "albums": albums, "tracks": songs })
-    const [recentlyPlayed, setRecentlyPlayed] = useState(songs)
+    const [recommendations, setRecommendations] = useState({ "tracks": songs })
+    const [recentlyPlayed, setRecentlyPlayed] = useState({ "tracks": songs })
     const [loading, setLoading] = useState(true)
     const { code } = route.params;
 
@@ -59,11 +60,14 @@ const Home = ({ navigation, route }) => {
             ) : (
                 <ScrollView style={styles.scrollCon}
                     contentContainerStyle={styles.container}
-                    refreshControl={<RefreshControl refreshing={loading} onRefresh={refresh} />}>
+                    refreshControl={<RefreshControl refreshing={loading} onRefresh={refresh} tintColor={colors.green} />}>
+                    <TouchableOpacity style={styles.welcomeContainer}>
+                        <Ionicons name="ios-musical-notes" size={40} color={colors.white} style={styles.icon}/>
+                        <Text style={styles.welcomeText}>ryanido</Text>
+                    </TouchableOpacity>
                     <Carousel title={"Recently Played"} data={recentlyPlayed.tracks} />
-                    <Carousel title={"Recommended Albums"} data={recommendations.albums} />
-                    <Carousel title={"Recommended Songs"} data={recommendations.tracks} />
                     {/* <ArtistCarousel title={"Recommended Artists"} data={artists} /> */}
+                    <Carousel title={"Recommended Songs"} data={recommendations.tracks} />
                 </ScrollView>
             )}
         </>
@@ -71,6 +75,18 @@ const Home = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
+    welcomeText: {
+        fontSize: 40,
+        color: colors.white,
+    },
+    welcomeContainer: {
+        padding: 10,
+        flexDirection:'row',
+        justifyContent:'center'
+    },
+    icon:{
+        paddingTop:5
+    },
     scrollCon: {
         backgroundColor: colors.darkGray,
     },
