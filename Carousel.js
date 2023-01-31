@@ -3,7 +3,7 @@ import { View, FlatList, StyleSheet, Text } from 'react-native'
 import AlbumIcon from './AlbumIcon'
 import colors from './colors';
 
-const Carousel = ({data,title}) => {
+const Carousel = ({data,title,code}) => {
     return (
         <View style = {styles.container}>
             <View style={styles.header}>
@@ -15,7 +15,7 @@ const Carousel = ({data,title}) => {
                 showsHorizontalScrollIndicator={false} // hide the scroll indicator
                 keyExtractor={item => item.id} // use the album name as the key
                 renderItem={({ item }) => (
-                <AlbumIcon album={item} size={1.3}/>
+                <AlbumIcon album={item} size={1.3} code={code}/>
                 )}
             />
         </View>
@@ -25,10 +25,11 @@ const Carousel = ({data,title}) => {
 const styles = StyleSheet.create({
     header: {
         paddingVertical: 16,
-        paddingLeft:15
+        paddingLeft:15,
+        alignItems:'center'
     },
     headerText: {
-        fontSize: 18,
+        fontSize: 25,
         color: colors.white,
         fontWeight: 'bold',
     },

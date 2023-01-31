@@ -6,20 +6,24 @@ import Home from './Home';
 import Header from './Header';
 import LoginPage from './LoginPage';
 import AlbumPage from './AlbumPage';
+import colors from './colors';
 
 const AppNavigator = createStackNavigator();
 
 export default function App() {
   return (
     <>
-      <Header />
       <NavigationContainer>
         <AppNavigator.Navigator screenOptions={{
-          headerShown: false
+          title:"musaic",
+          headerStyle: {
+            backgroundColor: colors.green,
+          },
+          headerLeft: () => null
         }}>
           <AppNavigator.Screen name="Login" component={LoginPage} />
           <AppNavigator.Screen name="Home" component={Home} />
-          <AppNavigator.Screen name='AlbumPage' component={AlbumPage}/>
+          <AppNavigator.Screen name='AlbumPage' component={AlbumPage} />
         </AppNavigator.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />

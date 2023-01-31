@@ -3,12 +3,12 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import colors from './colors';
 
-const AlbumIcon = ({ album,size }) => {
+const AlbumIcon = ({ album,size,code }) => {
     const navigation = useNavigation();
     const styles = sheet(size)
     return (
         <TouchableOpacity style={styles.container} onPress ={() => {
-            navigation.navigate('AlbumPage',{album:album})
+            navigation.navigate('AlbumPage',{album:album,code:code})
         }}>
             <Image source={{ uri: album.cover }} style={styles.image} />
             <View style = {styles.desc}>
@@ -37,7 +37,7 @@ const sheet = (size) => StyleSheet.create({
     image: {
         height: size*100,
         aspectRatio: 1,
-        borderRadius: 8,
+    
     },
     name: {
         color: colors.white,

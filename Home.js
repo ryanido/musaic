@@ -12,10 +12,11 @@ import axios from 'axios';
 import { SERVER_URL } from '@env'
 import { RefreshControl } from 'react-native-gesture-handler';
 import {Ionicons} from 'react-native-vector-icons'
+import Squares from './Squares';
 
 const Home = ({ navigation, route }) => {
-    const [recommendations, setRecommendations] = useState({ "tracks": songs })
-    const [recentlyPlayed, setRecentlyPlayed] = useState({ "tracks": songs })
+    const [recommendations, setRecommendations] = useState({})
+    const [recentlyPlayed, setRecentlyPlayed] = useState({})
     const [loading, setLoading] = useState(true)
     const { code } = route.params;
 
@@ -25,12 +26,12 @@ const Home = ({ navigation, route }) => {
 
     const refresh = () => {
         setLoading(true)
-        getRecommendations();
-        getRecentlyPlayed();
-        setLoading(false)
+        Promise.all([getRecommendations(),getRecentlyPlayed()]).then(
+            setLoading(false)
+        )
     }
     const getRecommendations = () => {
-        axios.get(`${SERVER_URL}recommendations`, {
+        return axios.get(`${SERVER_URL}recommendations`, {
             params: {
                 code: code
             }
@@ -41,8 +42,10 @@ const Home = ({ navigation, route }) => {
         });
     }
 
+   
+
     const getRecentlyPlayed = () => {
-        axios.get(`${SERVER_URL}recently-played`, {
+        return axios.get(`${SERVER_URL}recently-played`, {
             params: {
                 code: code
             }
@@ -56,7 +59,7 @@ const Home = ({ navigation, route }) => {
     return (
         <>
             {loading ? (
-                <ActivityIndicator size="large" color="#0000ff" />
+                <ActivityIndicator size="large" color={colors.lightGray}/>
             ) : (
                 <ScrollView style={styles.scrollCon}
                     contentContainerStyle={styles.container}
@@ -65,9 +68,9 @@ const Home = ({ navigation, route }) => {
                         <Ionicons name="ios-musical-notes" size={40} color={colors.white} style={styles.icon}/>
                         <Text style={styles.welcomeText}>ryanido</Text>
                     </TouchableOpacity>
-                    <Carousel title={"Recently Played"} data={recentlyPlayed.tracks} />
-                    {/* <ArtistCarousel title={"Recommended Artists"} data={artists} /> */}
-                    <Carousel title={"Recommended Songs"} data={recommendations.tracks} />
+                    <Carousel title={"Recently Played"} data={recentlyPlayed.tracks} code={code}/>
+                    {/* <ArtistCarousel title={"Recommended Artists"} data={artists}  code={code}/> */}
+                    <Squares title={"Recommended Songs"} data={recommendations.tracks} code={code}/>
                 </ScrollView>
             )}
         </>

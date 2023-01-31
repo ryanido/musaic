@@ -24,10 +24,11 @@ const ArtistCarousel = ({ data, title }) => {
 const styles = StyleSheet.create({
     header: {
         paddingVertical: 16,
-        paddingLeft: 15
+        paddingLeft: 15,
+        alignItems: 'center'
     },
     headerText: {
-        fontSize: 18,
+        fontSize: 25,
         color: colors.white,
         fontWeight: 'bold',
     },
