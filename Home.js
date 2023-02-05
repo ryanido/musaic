@@ -70,7 +70,7 @@ const Home = ({ navigation, route }) => {
                     </TouchableOpacity>
                     <Carousel title={"Recently Played"} data={recentlyPlayed.tracks} code={code}/>
                     {/* <ArtistCarousel title={"Recommended Artists"} data={artists}  code={code}/> */}
-                    <Squares title={"Recommended Songs"} data={recommendations.tracks} code={code}/>
+                   <Squares title={"Recommended Songs"} data={recommendations.tracks} code={code}/>
                 </ScrollView>
             )}
         </>

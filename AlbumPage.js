@@ -8,12 +8,10 @@ import { SERVER_URL } from '@env'
 import songs from './songs.json'
 
 function AlbumPage({ navigation, route }) {
-  console.log(route.params);
   const { album, code } = route.params;
   const [recommendations, setRecommendations] = useState({ "tracks": songs })
   const [loading, setLoading] = useState(true)
   const getSongRecommendations = () => {
-    console.log(album)
     axios.get(`${SERVER_URL}song-recommendations`, {
       params: {
         code: code,
@@ -23,37 +21,50 @@ function AlbumPage({ navigation, route }) {
     }).then(response => {
       setRecommendations(response.data)
       setLoading(false)
-      console.log(recommendations)
     }).catch(error => {
       alert(error)
     });
   }
+  async function openAlbum(album) {
+    try {
+      const supported = await Linking.canOpenURL(album.uri);
+      if (supported) {
+        await Linking.openURL(album.uri);
+      } else {
+        alert("Install Spotify to Listen!!")
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
   useEffect(() => {
     getSongRecommendations()
-    console.log(recommendations.tracks)
-  }, []);
+  }, [album]);
 
   return (
     <>
       {loading ? (
-        <View style={[styles.container,{flex:1,justifyContent:'center'}]}>
+        <View style={[styles.container, { flex: 1, justifyContent: 'center' }]}>
           <ActivityIndicator size="large" color={colors.lightGray} />
         </View>
       ) : (
-        <ScrollView contentContainerStyle={styles.container} style={{backgroundColor:colors.lighterDarkGray}}>
+        <ScrollView contentContainerStyle={styles.container} style={{ backgroundColor: colors.lighterDarkGray }}>
           <TouchableOpacity style={styles.arrow} onPress={() => navigation.goBack()}>
             <Ionicons name='ios-arrow-back-outline' size={32} color={colors.white} />
           </TouchableOpacity>
           <Image style={styles.cover} source={{ uri: album.cover }} />
           <Text style={styles.albumName}>{album.name}</Text>
           <Text style={styles.artistName}>{album.artist}</Text>
-          <TouchableOpacity style={styles.playButton} onPress={() => Linking.openURL(album.uri)}>
+          <TouchableOpacity style={styles.playButton} onPress={() => openAlbum(album)}>
             <Ionicons name='play' size={25} color={colors.black} />
             <View style={styles.playButtonB}>
               <Text style={styles.playButtonText}>Play</Text>
             </View>
           </TouchableOpacity>
-          <Squares title={"You Might Also Like"} data={recommendations.tracks} code={code} />
+          <View>
+            <Squares title={"You Might Also Like"} data={recommendations.tracks} code={code} />
+          </View>
         </ScrollView>
       )}
     </>)
@@ -63,7 +74,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: colors.lighterDarkGray,
-    
   },
   cover: {
     marginTop: 30,
@@ -78,8 +88,8 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontWeight: 'bold',
     fontSize: 20,
-    width:300,
-    
+    width: 300,
+    textAlign: 'center'
   },
   artistName: {
     color: colors.lightGray,

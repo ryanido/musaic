@@ -3,7 +3,11 @@ import React from 'react'
 import { Image, View, StyleSheet, FlatList, Text } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import colors from './colors'
+import { Dimensions } from 'react-native';
 
+const { height, width } = Dimensions.get('window');
+
+const imageHeight = height > 700 ? 120 : 100;
 
 const Squares = ({ title, data, code }) => {
   const navigation = useNavigation();
@@ -33,9 +37,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   image: {
-    height: 100,
+    height: imageHeight,
     aspectRatio: 1,
-    width: 100,
     margin: 10
   },
   header: {

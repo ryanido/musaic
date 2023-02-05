@@ -23,6 +23,7 @@ export default function LoginPage({ navigation }) {
             scopes: [
                 'user-read-email',
                 'playlist-read-private',
+                'streaming',
                 'user-top-read',
                 'user-library-read',
                 'user-read-recently-played'
