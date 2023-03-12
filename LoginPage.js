@@ -55,7 +55,7 @@ export default function LoginPage({ navigation }) {
                     // The access token is contained in the `data` object
                     console.log(data)
                     const { access_token } = data;
-                    navigation.navigate('Home', { code: access_token });
+                    navigation.navigate('TabNav', { code: access_token });
                 })
                 .catch((error) => console.log(error) )
         }

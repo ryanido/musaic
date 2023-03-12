@@ -14,11 +14,10 @@ import { RefreshControl } from 'react-native-gesture-handler';
 import {Ionicons} from 'react-native-vector-icons'
 import Squares from './Squares';
 
-const Home = ({ navigation, route }) => {
+const Home = ({ navigation, code }) => {
     const [recommendations, setRecommendations] = useState({})
     const [recentlyPlayed, setRecentlyPlayed] = useState({})
     const [loading, setLoading] = useState(true)
-    const { code } = route.params;
 
     useEffect(() => {
         refresh();
