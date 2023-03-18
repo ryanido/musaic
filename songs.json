@@ -1,4 +1,5 @@
-[
+{
+  "tracks": [
     {
       "name": "Heartbreak Anniversary",
       "artist": "Giveon",
@@ -35,4 +36,5 @@
       "album": "Future Nostalgia",
       "cover": "https://i.imgur.com/0mVlDfj.jpg"
     }
-] 
+  ]
+}

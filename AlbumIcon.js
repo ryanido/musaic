@@ -22,7 +22,8 @@ const AlbumIcon = ({ album,size,code }) => {
 const sheet = (size) => StyleSheet.create({
     desc: {
         textAlign:'left',
-        width:'100%'
+        width:'100%',
+        paddingVertical:10,
     },
     container: {
         marginHorizontal: 12,
@@ -37,6 +38,7 @@ const sheet = (size) => StyleSheet.create({
     image: {
         height: size*100,
         aspectRatio: 1,
+        borderRadius: 5,
     
     },
     name: {
@@ -51,7 +53,7 @@ const sheet = (size) => StyleSheet.create({
     artist: {
         fontSize: size*12,
         color: colors.lightGray,
-        marginTop: 4,
+        marginTop: 2,
     },
 });
 

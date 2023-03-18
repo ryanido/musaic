@@ -1,47 +1,49 @@
-[
+{
+  "tracks": [
     {
-        "name": "Give or Take",
-        "artist": "Giveon",
-        "cover": "https://i.imgur.com/7L2G5F5.jpg"
+      "name": "Give or Take",
+      "artist": "Giveon",
+      "cover": "https://i.imgur.com/7L2G5F5.jpg"
     },
     {
-        "name": "Lost and Found",
-        "artist": "Jorja Smith",
-        "cover": "https://i.imgur.com/mDdvL6Q.jpg"
+      "name": "Lost and Found",
+      "artist": "Jorja Smith",
+      "cover": "https://i.imgur.com/mDdvL6Q.jpg"
     },
     {
-        "name": "I Never Liked You",
-        "artist": "Future",
-        "cover": "https://i.imgur.com/TqTfLpT.jpg"
+      "name": "I Never Liked You",
+      "artist": "Future",
+      "cover": "https://i.imgur.com/TqTfLpT.jpg"
     },
     {
-        "name": "Her Loss",
-        "artist": "Drake",
-        "cover": "https://i.imgur.com/BmxaWy9.jpg"
+      "name": "Her Loss",
+      "artist": "Drake",
+      "cover": "https://i.imgur.com/BmxaWy9.jpg"
     },
     {
-        "name": "After Hours",
-        "artist": "The Weeknd",
-        "cover": "https://i.imgur.com/jZkOZ2Q.jpg"
+      "name": "After Hours",
+      "artist": "The Weeknd",
+      "cover": "https://i.imgur.com/jZkOZ2Q.jpg"
     },
     {
-        "name": "Legends Never Die",
-        "artist": "Juice WRLD",
-        "cover": "https://i.imgur.com/Ys1Jf1d.jpg"
+      "name": "Legends Never Die",
+      "artist": "Juice WRLD",
+      "cover": "https://i.imgur.com/Ys1Jf1d.jpg"
     },
     {
-        "name": "Blame It on Baby",
-        "artist": "DaBaby",
-        "cover": "https://i.imgur.com/vZk0lCx.jpg"
+      "name": "Blame It on Baby",
+      "artist": "DaBaby",
+      "cover": "https://i.imgur.com/vZk0lCx.jpg"
     },
     {
-        "name": "Shoot for the Stars Aim for the Moon",
-        "artist": "Pop Smoke",
-        "cover": "https://i.imgur.com/Idup09q.jpg"
+      "name": "Shoot for the Stars Aim for the Moon",
+      "artist": "Pop Smoke",
+      "cover": "https://i.imgur.com/Idup09q.jpg"
     },
     {
-        "name": "Folklore",
-        "artist": "Taylor Swift",
-        "cover": "https://i.imgur.com/DhE1kq3.jpg"
+      "name": "Folklore",
+      "artist": "Taylor Swift",
+      "cover": "https://i.imgur.com/DhE1kq3.jpg"
     }
-]
+  ]
+}

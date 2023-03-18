@@ -1,5 +1,6 @@
 {
   "expo": {
+    "scheme": "musaic",
     "name": "musaic",
     "slug": "musaic",
     "version": "1.0.0",

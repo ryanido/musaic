@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {Ionicons} from 'react-native-vector-icons'
+import { Ionicons } from 'react-native-vector-icons'
 import Home from './Home';
 import Header from './Header';
 import LoginPage from './LoginPage';
@@ -22,11 +22,12 @@ const TabNavigator = ({ route }) => {
         tabBarActiveTintColor: colors.green,
         tabBarInactiveTintColor: 'grey',
         headerShown: false,
-  
+
         tabBarStyle: {
           backgroundColor: colors.lighterDarkGray,
           borderTopWidth: 0
-        } }}
+        }
+      }}
     >
       <Tab.Screen name="Home"
         options={{
@@ -36,7 +37,7 @@ const TabNavigator = ({ route }) => {
         }} >
         {() => <Home code={code} />}
       </Tab.Screen>
-      <Tab.Screen name='Stats' 
+      <Tab.Screen name='Stats'
         options={{
           tabBarIcon: ({ color }) => (
             <Ionicons name="ios-stats-chart" size={25} color={color} />
@@ -61,7 +62,9 @@ export default function App() {
         }} >
           <AppNavigator.Screen name="Login" component={LoginPage} />
           <AppNavigator.Screen name='TabNav' component={TabNavigator} />
-          <AppNavigator.Screen name='AlbumPage' component={AlbumPage} />
+          <AppNavigator.Group screenOptions={{ presentation: 'modal', headerShown:false}}>
+            <AppNavigator.Screen name='AlbumPage' component={AlbumPage} />
+          </AppNavigator.Group>
         </AppNavigator.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />

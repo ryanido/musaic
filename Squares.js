@@ -16,17 +16,18 @@ const Squares = ({ title, data, code }) => {
       <View style={styles.header}>
         <Text style={styles.headerText}>{title}</Text>
       </View>
-      <FlatList
-        data={data}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress ={() => {navigation.navigate('AlbumPage', {album: item, code:code})}}>
-              <Image source={{ uri: item.cover }} style={styles.image} />
+      <View style={styles.squares}>
+        {data && data.map((item) => (
+          <TouchableOpacity
+            key={item.id}
+            onPress={() => {
+              navigation.navigate('AlbumPage', { album: item, code: code });
+            }}>
+            <Image source={{ uri: item.cover }} style={styles.image} />
           </TouchableOpacity>
-        )}
-        keyExtractor={item => item.id}
-        numColumns={3}
-        scrollEnabled={false}
-      />
+        ))}
+      </View>
+
     </View>
   )
 }
@@ -34,23 +35,28 @@ const Squares = ({ title, data, code }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center'
+    // alignItems: 'center'
   },
   image: {
     height: imageHeight,
     aspectRatio: 1,
-    margin: 10
+    margin: 10,
   },
   header: {
     paddingVertical: 16,
     paddingLeft: 15,
-    alignItems: 'center'
+    alignItems: 'left'
   },
   headerText: {
     fontSize: 25,
     color: colors.white,
     fontWeight: 'bold',
   },
+  squares: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  }
 })
 
 export default Squares
