@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Image, Text, TouchableOpacity, StyleSheet, Linking, ScrollView, ActivityIndicator } from 'react-native';
-import colors from './colors';
+import colors from '../../colors';
 import { Ionicons } from 'react-native-vector-icons'
 import Squares from './Squares';
 import axios from 'axios';

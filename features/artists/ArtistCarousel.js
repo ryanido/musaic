@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, FlatList, StyleSheet, Text } from 'react-native'
 import ArtistIcon from './ArtistIcon'
-import colors from './colors';
+import colors from '../../colors';
 const ArtistCarousel = ({ data, title }) => {
     return (
         <View style={styles.container}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
-import colors from './colors';
+import colors from '../colors';
 
 const Header = () => {
   return (

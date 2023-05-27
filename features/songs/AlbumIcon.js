@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import colors from './colors';
+import colors from '../../colors';
 
 const AlbumIcon = ({ album,size,code }) => {
     const navigation = useNavigation();

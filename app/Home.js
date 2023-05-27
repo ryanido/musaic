@@ -1,59 +1,56 @@
-import React, { useState, useEffect } from 'react';
-import { FlatList, View, StyleSheet, Text, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
-import AlbumIcon from './AlbumIcon';
-import albums from './albums.json'; // import the JSON data
-import songs from './songs.json';
-import artists from './artists.json'
-import Carousel from './Carousel';
-import colors from './colors';
-import Header from './Header';
-import ArtistCarousel from './ArtistCarousel';
-import axios from 'axios';
-import { SERVER_URL } from '@env'
+import { StyleSheet, Text, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
+import Carousel from '../features/songs/Carousel';
+import colors from '../colors';
 import { RefreshControl } from 'react-native-gesture-handler';
 import {Ionicons} from 'react-native-vector-icons'
-import Squares from './Squares';
+import Squares from '../features/songs/Squares';
+import { useGetRecentlyPlayedQuery, useGetRecommendationsQuery } from '../features/api/apiSlice';
 
 const Home = ({ navigation, code }) => {
-    const [recommendations, setRecommendations] = useState({})
-    const [recentlyPlayed, setRecentlyPlayed] = useState({})
-    const [loading, setLoading] = useState(true)
+    // const [recommendations, setRecommendations] = useState({})
+    // const [recentlyPlayed, setRecentlyPlayed] = useState({})
+    // const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        refresh();
-    }, []);
+    // useEffect(() => {
+    //     refresh();
+    // }, []);
 
-    const refresh = () => {
-        setLoading(true)
-        Promise.all([getRecommendations(),getRecentlyPlayed()]).then(
-            setLoading(false)
-        )
-    }
-    const getRecommendations = () => {
-        return axios.get(`${SERVER_URL}recommendations`, {
-            params: {
-                code: code
-            }
-        }).then(response => {
-            setRecommendations(response.data);
-        }).catch(error => {
-            console.log(error)
-        });
-    }
+    // const refresh = () => {
+    //     setLoading(true)
+    //     Promise.all([getRecommendations(),getRecentlyPlayed()]).then(
+    //         setLoading(false)
+    //     )
+    // }
+    // const getRecommendations = () => {
+    //     return axios.get(`${SERVER_URL}recommendations`, {
+    //         params: {
+    //             code: code
+    //         }
+    //     }).then(response => {
+    //         setRecommendations(response.data);
+    //     }).catch(error => {
+    //         console.log(error)
+    //     });
+    // }
 
    
 
-    const getRecentlyPlayed = () => {
-        return axios.get(`${SERVER_URL}recently-played`, {
-            params: {
-                code: code
-            }
-        }).then(response => {
-            setRecentlyPlayed(response.data);
-        }).catch(error => {
-            console.log(error)
-        });
-    }
+    // const getRecentlyPlayed = () => {
+    //     return axios.get(`${SERVER_URL}recently-played`, {
+    //         params: {
+    //             code: code
+    //         }
+    //     }).then(response => {
+    //         setRecentlyPlayed(response.data);
+    //     }).catch(error => {
+    //         console.log(error)
+    //     });
+    // }
+
+    const { data: recommendations, isLoading: recommendationsLoading } = useGetRecommendationsQuery(code)
+  const { data: recentlyPlayed, isLoading: recentlyPlayedLoading } = useGetRecentlyPlayedQuery(code)
+
+
 
     return (
         <>

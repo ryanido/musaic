@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, FlatList, StyleSheet, Text } from 'react-native'
 import AlbumIcon from './AlbumIcon'
-import colors from './colors';
+import colors from '../../colors';
 
 const Carousel = ({data,title,code}) => {
     return (

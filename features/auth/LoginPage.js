@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as WebBrowser from 'expo-web-browser';
 import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import { Button, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import colors from './colors';
-import spotifylogo from './assets/spotify.png'
+import colors from '../../colors';
+import spotifylogo from '../../assets/spotify.png'
 import {SERVER_URL,REDIRECT_URI,CLIENT_ID,CLIENT_SECRET} from "@env"
 
 
@@ -17,6 +17,7 @@ const discovery = {
 
 
 export default function LoginPage({ navigation }) {
+    console.log(REDIRECT_URI)
     const [request, response, promptAsync] = useAuthRequest(
         {
             clientId: CLIENT_ID,

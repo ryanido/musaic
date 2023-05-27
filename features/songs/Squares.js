@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { Image, View, StyleSheet, FlatList, Text } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import colors from './colors'
+import colors from '../../colors'
 import { Dimensions } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
